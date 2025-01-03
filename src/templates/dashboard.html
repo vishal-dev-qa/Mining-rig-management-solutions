@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+<body>
+    <h1>API Dashboard</h1>
+    <p>IP Address: {{ ip_address }}</p>
+    <div>
+        <button onclick="callApi('{{ ip_address }}', 'summary')">Summary</button>
+        <button onclick="callApi('{{ ip_address }}', 'stats')">Stats</button>
+        <button onclick="callApi('{{ ip_address }}', 'pools')">Pools</button>
+    </div>
+    <div id="response"></div>
+</body>
+</html>
