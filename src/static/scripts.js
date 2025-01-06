@@ -1,16 +1,26 @@
-function callApi(ip, endpoint) {
-    fetch('/api/trigger', {
+function callApi(ip, command) {
+    fetch('/trigger', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ip: ip, endpoint: endpoint })
+        body: JSON.stringify({ ip: ip, command: command })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+        if (data.error) {
+            document.getElementById('response').innerText = `Error: ${data.error}`;
+        } else {
+            document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+        }
     })
     .catch(error => {
-        document.getElementById('response').innerText = 'Error: ' + error;
+        console.error('Error:', error);
+        document.getElementById('response').innerText = `Error: ${error.message}`;
     });
 }

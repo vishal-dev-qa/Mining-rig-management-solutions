@@ -6,6 +6,7 @@
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
 <body>
+    <center>
     <h1>API Dashboard</h1>
     <p>IP Address: {{ ip_address }}</p>
     <div>
@@ -14,5 +15,6 @@
         <button onclick="callApi('{{ ip_address }}', 'pools')">Pools</button>
     </div>
     <div id="response"></div>
+</center>
 </body>
 </html>
